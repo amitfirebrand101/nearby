@@ -29,7 +29,9 @@ The form will show a clear configuration message until the environment variables
 
 ## Deploy with a webhook instead
 
-If you already use a form/webhook service, add `WAITLIST_WEBHOOK_URL` in Vercel. The endpoint will POST the name, phone, email, reason, and `submittedAt` to that URL. When this variable is present it takes precedence over Supabase.
+If you already use a form/webhook service, add `WAITLIST_WEBHOOK_URL` in Vercel. The endpoint will POST the name, phone, email, reason, optional `suggestions` (when non-empty), and `submittedAt` to that URL. When this variable is present it takes precedence over Supabase.
+
+The optional “Anything you’d love to see in Nearby?” answer is limited to 1,000 characters. With Supabase, it is appended to the existing free-text `reason` column under `Feature suggestions:`. This preserves both answers without requiring a production schema migration; submissions with no suggestions keep the original storage shape. With a webhook, it is a separate `suggestions` field.
 
 ## Test locally
 
@@ -48,17 +50,19 @@ The page is designed to be usable on narrow phone screens, supports keyboard foc
 
 The supplied design boards are used directly, with CSS crops for the phone views—not reconstructed app screens. They are visibly identified as concepts. Copy distinguishes the current Android pilot from future availability, and does not advertise verified users, precise distances, extra social channels or a public store release as shipped features. Names/photos are public while discoverable; socials are shared by choice.
 
-Pip appears in the hero, journey tips, practice Ping, signup and confirmed-success state. Animations can be paused and respect the operating system's reduced-motion setting. The practice Ping sends no network request.
+Pip appears in the hero, two-sided demonstration, Live Likes, journey tips, signup and confirmed-success state. The header navigation and repetitive hero were replaced with “Reach out without bothering. Break the ice.” Pings and Live Likes have distinct messaging: a Ping invites a hello; a Live Like is appreciation without asking for a conversation.
 
-The existing `api/waitlist.js`, `supabase.sql` and Vercel configuration are unchanged. Storage credentials remain server-only. No production signup was created during testing.
+The sender/receiver demo plays once on scroll, supports replay and mode switching, and sends no network requests. It is illustrative, not an actual app delivery or notification test. Animations can be paused and respect the operating system's reduced-motion setting.
 
-Run `node --test tests/waitlist.test.cjs` for API and client-form regression tests with mocked provider responses. These do not verify that your deployed Supabase/webhook credentials are configured.
+The API adds validation and storage of optional suggestions. Database schema and Vercel configuration remain unchanged; storage credentials remain server-only. No production signup was created during testing.
+
+Run `node --test tests/*.test.cjs` for API, client-form and Ping/Like demonstration regression tests with mocked provider responses. These do not verify that your deployed Supabase/webhook credentials are configured.
 
 ### Verification — October 10, 2026
 
-- All 13 API/client regression tests passed; JavaScript syntax and Git whitespace checks passed.
+- All 20 API/client/demo regression tests passed, including optional suggestions, sending versus received states, mode-switch cancellation, replay, scroll entry and reduced-motion behavior.
 - Desktop composition and full-page layout visually inspected. Mobile widths 320/390 and tablet width 768 checked; no document-level horizontal overflow after the correction.
 - Journey selection, arrow-key navigation, practice-Ping response, concept-dialog open/close and empty-form validation checked in the browser.
 - Hero images loaded successfully. Main concept WebP images total 475,080 bytes; supplied originals are retained for the full-board viewer.
 - Signup success, duplicate-email, server-field-error and malformed-success handling checked with mocked responses. No real signup was submitted; deployed persistence has not been verified.
-- App code, waitlist server adapter, database schema and Vercel configuration untouched. Changes are local and have not been pushed or published.
+- Native app code, database schema and Vercel configuration untouched. This follow-up revision is local until pushed.

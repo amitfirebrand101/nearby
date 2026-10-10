@@ -9,6 +9,7 @@ const valid = {
   phone: "+1 202 555 0100",
   email: "demo@example.com",
   reason: "Meet people at gigs.",
+  suggestions: "",
   website: "",
 };
 
@@ -87,7 +88,7 @@ test("API ignores honeypot submissions without writing data", async () => {
 test("API does not fake success when storage is unconfigured", async () => {
   assert.equal((await api("POST", valid)).code, 503);
 });
-test("webhook stores the unchanged four-field signup contract", async () => {
+test("webhook stores the original signup fields", async () => {
   const r = await api(
     "POST",
     { ...valid, email: "DEMO@example.com" },
@@ -100,6 +101,41 @@ test("webhook stores the unchanged four-field signup contract", async () => {
   assert.equal(data.reason, valid.reason);
   assert.ok(data.submittedAt);
   assert.equal(data.website, undefined);
+  assert.equal(data.suggestions, undefined);
+});
+test("optional suggestions are saved by both adapters without a schema migration", async () => {
+  const signup = { ...valid, suggestions: "  More Live Likes animations.  " };
+  const webhook = await api("POST", signup, {
+    WAITLIST_WEBHOOK_URL: "https://example.invalid/demo",
+  });
+  const webhookData = JSON.parse(webhook.calls[0].options.body);
+  assert.equal(webhookData.suggestions, "More Live Likes animations.");
+  assert.equal(webhookData.reason, valid.reason);
+  const db = await api("POST", signup, {
+    SUPABASE_URL: "https://example.invalid",
+    SUPABASE_SERVICE_ROLE_KEY: "test-only-key",
+  });
+  assert.equal(db.code, 201);
+  const dbData = JSON.parse(db.calls[0].options.body);
+  assert.equal(
+    dbData.reason,
+    `${valid.reason}\n\nFeature suggestions:\nMore Live Likes animations.`,
+  );
+  assert.equal(dbData.suggestions, undefined);
+});
+test("suggestions are optional, bounded, and reject non-text input", async () => {
+  for (const suggestions of ["x".repeat(1001), { bad: true }, 42]) {
+    const r = await api("POST", { ...valid, suggestions });
+    assert.equal(r.code, 400);
+    assert.ok(r.payload.fields.suggestions);
+    assert.equal(r.calls.length, 0);
+  }
+  const r = await api(
+    "POST",
+    { ...valid, suggestions: "x".repeat(1000), reason: "y".repeat(1000) },
+    { WAITLIST_WEBHOOK_URL: "https://example.invalid/demo" },
+  );
+  assert.equal(r.code, 201);
 });
 test("Supabase adapter sends signup to the original table", async () => {
   const r = await api("POST", valid, {
@@ -164,7 +200,7 @@ function client(values, response) {
     scrollIntoView() {},
   });
   const inputs = Object.fromEntries(
-    ["name", "phone", "email", "reason"].map((k) => {
+    ["name", "phone", "email", "reason", "suggestions"].map((k) => {
       const node = element();
       const field = element();
       node.closest = () => field;
@@ -238,6 +274,18 @@ test("client only shows success after server confirmation", async () => {
   assert.equal(c.nodes["#success-state"].hidden, false);
   assert.ok(c.nodes["#success-state"].focused);
   assert.equal(c.nodes["#waitlist-form"].hidden, true);
+});
+test("client sends optional ideas and validates their length before fetching", async () => {
+  const c = client(
+    { ...valid, suggestions: "  More reactions please.  " },
+    { ok: true, status: 201, payload: { ok: true } },
+  );
+  await c.submit();
+  assert.equal(c.calls[0].data.suggestions, "More reactions please.");
+  const invalid = client({ ...valid, suggestions: "x".repeat(1001) }, {});
+  await invalid.submit();
+  assert.equal(invalid.calls.length, 0);
+  assert.ok(invalid.inputs.suggestions.focused);
 });
 test("client handles duplicate email without displaying false success", async () => {
   const c = client(valid, {

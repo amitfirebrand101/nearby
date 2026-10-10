@@ -13,7 +13,7 @@
     {
       title: ["A small tap.", "Not a big scene."],
       description:
-        "A Like is a little appreciation. A Ping says you’d be open to connecting. No walking across the room to put someone on the spot.",
+        "Send a Ping to break the ice. Or a Live Like to appreciate them, without asking for a conversation. Two little ways to make a real-life moment feel good.",
       tip: "Appreciation is an invitation. It doesn’t mean they owe you a response.",
       sticker: "good energy, sent ↗",
       source: "day",
@@ -33,7 +33,7 @@
     {
       title: ["A yes, on your terms.", "Share just enough."],
       description:
-        "Want to connect? Choose the Instagram or WhatsApp details you’d like to share. A Ping alone never gives someone access to your socials.",
+        "Want to keep talking? Choose the Instagram or WhatsApp details you’d like to share. A Ping alone never gives someone access to your socials.",
       tip: "Only selected contact details are sent. The concept shows extra channels not in the current pilot.",
       sticker: "only what you choose ✓",
       source: "day",
@@ -115,25 +115,6 @@
         });
       }
     });
-  let pingTimer,
-    pingCount = 0;
-  const scene = document.querySelector("#play-scene");
-  const ping = document.querySelector("#practice-ping");
-  const reactions = [
-    "Pip noticed you back. A little hello goes a long way.",
-    "Good energy, received. Pip’s day = made.",
-    "That’s the feeling. Small signal, big smile.",
-  ];
-  ping?.addEventListener("click", () => {
-    clearTimeout(pingTimer);
-    scene.classList.remove("pinged");
-    void scene.offsetWidth;
-    scene.classList.add("pinged");
-    document.querySelector("#play-response").textContent =
-      reactions[pingCount++ % reactions.length];
-    ping.querySelector("span").textContent = "One more little Ping?";
-    pingTimer = setTimeout(() => scene.classList.remove("pinged"), 1500);
-  });
   const motionToggle = document.querySelector("#motion-toggle");
   let paused = matchMedia("(prefers-reduced-motion: reduce)").matches;
   try {
@@ -176,6 +157,148 @@
 })();
 
 (() => {
+  const demo = document.querySelector("#signal-demo");
+  if (!demo) return;
+  const sendButton = document.querySelector("#send-signal");
+  const choices = [...document.querySelectorAll("[data-signal]")];
+  const motion = matchMedia("(prefers-reduced-motion: reduce)");
+  let mode = "ping",
+    timer;
+  const text = (id, value) => {
+    document.querySelector(id).textContent = value;
+  };
+  const reduced = () =>
+    motion.matches ||
+    document.documentElement.classList.contains("motion-paused");
+  const reset = () => {
+    clearTimeout(timer);
+    demo.classList.remove("sending", "received");
+    sendButton.disabled = false;
+    const like = mode === "like";
+    text("#signal-button-text", like ? "Send a Live Like" : "Send a Ping");
+    text(
+      "#sender-status",
+      like
+        ? "A compliment without saying a word."
+        : "No overthinking the opening line.",
+    );
+    text(
+      "#signal-caption",
+      like
+        ? "Give a little appreciation. See the little lift. Tap to try it."
+        : "You send a little courage. They get butterflies. Tap to try it.",
+    );
+  };
+  const selectMode = (next) => {
+    mode = next;
+    reset();
+    const like = mode === "like";
+    demo.dataset.mode = mode;
+    choices.forEach((button) =>
+      button.setAttribute(
+        "aria-pressed",
+        String(button.dataset.signal === mode),
+      ),
+    );
+    text("#signal-symbol", like ? "♡" : "✦");
+    text(
+      "#send-heading",
+      like ? "You like their energy." : "You noticed Rhea.",
+    );
+    text(
+      "#receive-heading",
+      like ? "A compliment. Out of nowhere." : "That “wait, me?” feeling.",
+    );
+    text(
+      "#receive-notice",
+      like ? "Alex sent you a Live Like." : "You got a Ping from Alex.",
+    );
+    text(
+      "#receive-detail",
+      like
+        ? "You made an impression. No reply needed."
+        : "Someone wants to say hello. Your move.",
+    );
+    text(
+      "#receiver-feeling",
+      like
+        ? "A little confidence boost. Just because."
+        : "Someone noticed you. Let that sink in.",
+    );
+    document.querySelector("#receiver-options").hidden = like;
+    text(".travelling-signal", like ? "♡" : "✦");
+  };
+  const send = () => {
+    reset();
+    sendButton.disabled = true;
+    // Restart only this finite, local animation. Never contact the app or signup API.
+    void demo.offsetWidth;
+    demo.classList.add("sending");
+    text(
+      "#signal-button-text",
+      mode === "like" ? "Sending Like…" : "Sending Ping…",
+    );
+    text("#signal-caption", "A little good energy, on its way…");
+    const finish = () => {
+      demo.classList.remove("sending");
+      demo.classList.add("received");
+      sendButton.disabled = false;
+      text(
+        "#signal-button-text",
+        mode === "like" ? "Like sent ✓ · again?" : "Ping sent ✓ · again?",
+      );
+      text(
+        "#sender-status",
+        mode === "like"
+          ? "You gave someone a little lift."
+          : "You did it. The ice is broken.",
+      );
+      text(
+        "#signal-caption",
+        mode === "like"
+          ? "Like sent. Smile received. No conversation required. (Demo)"
+          : "Ping received. That little rush, on both sides. Their choice comes next. (Demo)",
+      );
+    };
+    if (reduced()) finish();
+    else timer = setTimeout(finish, 1100);
+  };
+  choices.forEach((button) =>
+    button.addEventListener("click", () => selectMode(button.dataset.signal)),
+  );
+  sendButton.addEventListener("click", send);
+  document.querySelector("#replay-signal").addEventListener("click", send);
+  document.querySelector("#try-live-like").addEventListener("click", () => {
+    selectMode("like");
+    demo.scrollIntoView({
+      behavior: reduced() ? "instant" : "smooth",
+      block: "center",
+    });
+    sendButton.focus({ preventScroll: true });
+    send();
+  });
+  // Play once when the two-sided moment comes into view; scrolling never traps the visitor.
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          if (
+            !demo.classList.contains("received") &&
+            !demo.classList.contains("sending") &&
+            !reduced()
+          )
+            send();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    observer.observe(demo);
+  }
+  window.addEventListener("pagehide", () => clearTimeout(timer));
+})();
+
+(() => {
   const form = document.querySelector("#waitlist-form");
   const formCard = document.querySelector(".form-card");
   const status = document.querySelector("#form-status");
@@ -188,7 +311,7 @@
 
   if (!form || !formCard || !status || !successState || !submitButton) return;
 
-  const fields = ["name", "phone", "email", "reason"];
+  const fields = ["name", "phone", "email", "reason", "suggestions"];
 
   const getField = (name) => form.elements.namedItem(name);
 
@@ -210,6 +333,7 @@
     const phone = values.phone.trim();
     const email = values.email.trim();
     const reason = values.reason.trim();
+    const suggestions = String(values.suggestions || "").trim();
     const digits = phone.replace(/\D/g, "");
 
     if (name.length < 2 || name.length > 80)
@@ -220,6 +344,8 @@
       errors.email = "Please enter a valid email.";
     if (reason.length < 5 || reason.length > 1000)
       errors.reason = "Tell us a little more — one sentence is perfect.";
+    if (suggestions.length > 1000)
+      errors.suggestions = "Keep your ideas under 1,000 characters.";
 
     return errors;
   };
@@ -277,6 +403,7 @@
           phone: values.phone.trim(),
           email: values.email.trim().toLowerCase(),
           reason: values.reason.trim(),
+          suggestions: String(values.suggestions || "").trim(),
           website: values.website || "",
         }),
       });
