@@ -5,8 +5,10 @@ This is a standalone, Vercel-ready landing page for Nearby. It is intentionally 
 ## What is included
 
 - `index.html` — the landing page and waitlist form
-- `styles.css` — responsive dark, editorial UI
-- `app.js` — client-side validation, submit state, and success state
+- `styles.css` — responsive cream/coral/pink visual direction, dark concept-screen journey, and reduced-motion support
+- `app.js` — interactive journey, practice Ping, concept-board viewer, motion controls, and validated signup
+- `assets/pip.svg` — original round mascot; no heart silhouette or third-party character
+- `assets/concept-*` — supplied concept boards, with WebP copies for faster page loading; original PNGs retained
 - `api/waitlist.js` — server-side validation and persistence adapter
 - `supabase.sql` — one-time database table setup
 - `vercel.json` — clean URLs and basic security headers
@@ -31,7 +33,9 @@ If you already use a form/webhook service, add `WAITLIST_WEBHOOK_URL` in Vercel.
 
 ## Test locally
 
-For the visual page only, open `index.html` in a browser or run any static server from this folder. The `/api/waitlist` route is provided by Vercel, so the form submission itself should be tested with `vercel dev` after adding local environment variables.
+Run `node tools/preview.cjs` and open `http://127.0.0.1:4173`. This loopback-only server uses the existing API adapter. Without storage environment variables it returns a configuration error, not a fake successful signup. It serves only public page files and assets, not source/configuration files.
+
+For Vercel's full environment, use `vercel dev` after adding local environment variables.
 
 ```bash
 cd nearby-waitlist
@@ -39,3 +43,22 @@ vercel dev
 ```
 
 The page is designed to be usable on narrow phone screens, supports keyboard focus, includes a reduced-motion mode, and keeps the app's opt-in/privacy promises visible throughout the journey.
+
+## Revamp notes
+
+The supplied design boards are used directly, with CSS crops for the phone views—not reconstructed app screens. They are visibly identified as concepts. Copy distinguishes the current Android pilot from future availability, and does not advertise verified users, precise distances, extra social channels or a public store release as shipped features. Names/photos are public while discoverable; socials are shared by choice.
+
+Pip appears in the hero, journey tips, practice Ping, signup and confirmed-success state. Animations can be paused and respect the operating system's reduced-motion setting. The practice Ping sends no network request.
+
+The existing `api/waitlist.js`, `supabase.sql` and Vercel configuration are unchanged. Storage credentials remain server-only. No production signup was created during testing.
+
+Run `node --test tests/waitlist.test.cjs` for API and client-form regression tests with mocked provider responses. These do not verify that your deployed Supabase/webhook credentials are configured.
+
+### Verification — October 10, 2026
+
+- All 13 API/client regression tests passed; JavaScript syntax and Git whitespace checks passed.
+- Desktop composition and full-page layout visually inspected. Mobile widths 320/390 and tablet width 768 checked; no document-level horizontal overflow after the correction.
+- Journey selection, arrow-key navigation, practice-Ping response, concept-dialog open/close and empty-form validation checked in the browser.
+- Hero images loaded successfully. Main concept WebP images total 475,080 bytes; supplied originals are retained for the full-board viewer.
+- Signup success, duplicate-email, server-field-error and malformed-success handling checked with mocked responses. No real signup was submitted; deployed persistence has not been verified.
+- App code, waitlist server adapter, database schema and Vercel configuration untouched. Changes are local and have not been pushed or published.

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" fill="none">
+  <title>Pip — a little ball of good energy</title>
+  <defs>
+    <radialGradient id="body" cx="0" cy="0" r="1" gradientTransform="translate(117 103) rotate(59) scale(170 150)" gradientUnits="userSpaceOnUse"><stop stop-color="#ffaaa4"/><stop offset=".28" stop-color="#ff688a"/><stop offset=".65" stop-color="#ed3a75"/><stop offset="1" stop-color="#ba255e"/></radialGradient>
+    <linearGradient id="arm" x1="227" y1="119" x2="273" y2="194" gradientUnits="userSpaceOnUse"><stop stop-color="#ff83a1"/><stop offset="1" stop-color="#d82f6d"/></linearGradient>
+    <linearGradient id="foot" x1="144" y1="251" x2="136" y2="285" gradientUnits="userSpaceOnUse"><stop stop-color="#ee5288"/><stop offset="1" stop-color="#b92a60"/></linearGradient>
+    <radialGradient id="shine" cx="0" cy="0" r="1" gradientTransform="translate(114 100) rotate(49) scale(58 30)" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="iris" cx="0" cy="0" r="1" gradientTransform="translate(133 157) rotate(85) scale(24 18)" gradientUnits="userSpaceOnUse"><stop stop-color="#564057"/><stop offset="1" stop-color="#211a29"/></radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="5"/></filter>
+  </defs>
+  <ellipse cx="158" cy="292" rx="77" ry="9" fill="#6c3347" opacity=".17" filter="url(#blur)"/>
+  <path d="M112 232c-5 14-18 24-19 38-1 12 16 16 27 8 8-6 13-19 16-31" fill="url(#foot)"/>
+  <path d="M182 238c1 17 5 34 16 43 11 7 29 1 25-10-5-13-20-21-24-35" fill="url(#foot)"/>
+  <path d="M103 269c-3 9 1 14 13 10l9-5" stroke="#ff8eab" stroke-width="5" stroke-linecap="round"/>
+  <path d="M202 276c5 5 12 6 18 1" stroke="#ff8eab" stroke-width="4" stroke-linecap="round"/>
+  <path d="M80 183c-23 5-34 13-37 28-2 9 7 16 14 11 10-7 15-13 31-17" fill="url(#arm)"/>
+  <path d="M230 173c20-6 28-22 27-42l-3-16c-2-8 8-10 11-3l5 14 4-18c2-9 12-7 11 1l-1 20 6-10c6-8 13-1 8 7l-13 20c-6 25-22 42-42 47" fill="url(#arm)"/>
+  <path d="M264 123l7 9 12-2" stroke="#c43169" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+  <circle cx="156" cy="163" r="94" fill="url(#body)"/>
+  <ellipse cx="117" cy="105" rx="45" ry="27" transform="rotate(-26 117 105)" fill="url(#shine)"/>
+  <path d="M89 103c13-19 34-27 57-27" stroke="#ffd0c2" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+  <ellipse cx="117" cy="158" rx="28" ry="35" transform="rotate(6 117 158)" fill="#fff9f5"/>
+  <ellipse cx="184" cy="148" rx="27" ry="34" transform="rotate(-7 184 148)" fill="#fff9f5"/>
+  <ellipse cx="125" cy="162" rx="18" ry="25" transform="rotate(5 125 162)" fill="url(#iris)"/>
+  <ellipse cx="190" cy="153" rx="17" ry="24" transform="rotate(-5 190 153)" fill="url(#iris)"/>
+  <ellipse cx="120" cy="150" rx="7" ry="9" fill="white"/><ellipse cx="185" cy="141" rx="7" ry="8" fill="white"/>
+  <circle cx="134" cy="170" r="3" fill="#fff" opacity=".65"/><circle cx="198" cy="160" r="3" fill="#fff" opacity=".65"/>
+  <ellipse cx="95" cy="198" rx="13" ry="7" fill="#ffa0af" opacity=".65"/><ellipse cx="209" cy="185" rx="13" ry="7" fill="#ffa0af" opacity=".65"/>
+  <path d="M140 196c10 4 22 1 31-7 2-2 5-1 4 3-3 17-14 27-25 21-6-3-9-9-11-14-1-2 0-4 1-3" fill="#4a1938"/>
+  <path d="M149 209c6-7 13-7 19-4-5 8-12 12-19 4" fill="#ff97ac"/>
+  <path d="M141 53c9-14 22-12 27-1" stroke="#754357" stroke-width="7" stroke-linecap="round"/><circle cx="172" cy="51" r="7" fill="#ffc96c"/>
+  <path d="M251 75l10-11m6 30 14-3M236 59l1-13" stroke="#ffa98e" stroke-width="5" stroke-linecap="round"/>
+</svg>
