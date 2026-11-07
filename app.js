@@ -432,6 +432,8 @@
       form.hidden = true;
       status.hidden = true;
       successState.hidden = false;
+      if (typeof window !== "undefined" && typeof window.fbq === "function")
+        window.fbq("track", "Lead");
       successState.focus({ preventScroll: true });
       successState.scrollIntoView({
         behavior: document.documentElement.classList.contains("motion-paused")
