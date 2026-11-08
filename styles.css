@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
 :root {
-  --cream: #fff9f1;
-  --ink: #28221f;
-  --pink: #e53268;
-  --coral: #ff876b;
-  --muted: #73665e;
-  --line: #e5dcd1;
-  --night: #211b2c;
+  --cream: #f7f8ff;
+  --ink: #25243b;
+  --pink: #7257e8;
+  --coral: #ff9a55;
+  --muted: #68708c;
+  --line: #e0e3f0;
+  --night: #17172f;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 * {
@@ -75,11 +75,11 @@ button:disabled {
   display: none !important;
 }
 :focus-visible {
-  outline: 3px solid #9344c4;
+  outline: 3px solid #7257e8;
   outline-offset: 5px;
 }
 ::selection {
-  background: #ffd09e;
+  background: #d9d4ff;
   color: var(--ink);
 }
 .skip-link {
@@ -175,7 +175,7 @@ button:disabled {
   gap: 20px;
 }
 .button-pink {
-  background: linear-gradient(105deg, #ef3b79 0%, #f45a73 48%, #ff9f78 100%);
+  background: linear-gradient(105deg, #6846e6 0%, #8a5ce8 48%, #ff9a55 100%);
   color: #fff;
   box-shadow: 0 4px 0 #a93b4e20;
 }
@@ -196,7 +196,7 @@ button:disabled {
   height: 7px;
   border-radius: 50%;
   background: var(--pink);
-  box-shadow: 0 0 0 5px #e532680c;
+  box-shadow: 0 0 0 5px #7257e80c;
 }
 .text-link {
   display: inline-flex;
@@ -284,10 +284,10 @@ button:disabled {
   top: 35px;
   background: radial-gradient(
     circle at 55% 30%,
-    #ffe7bf 0%,
-    #ffd6bd 45%,
-    #fac1c4 80%,
-    #f4b4bb 100%
+    #d9d7ff 0%,
+    #c4cbff 45%,
+    #f8d7c7 80%,
+    #f3c8b2 100%
   );
   z-index: -1;
 }
@@ -443,8 +443,8 @@ button:disabled {
   color: var(--muted);
 }
 .vibe-strip {
-  background: #ff6a81;
-  color: #342124;
+  background: linear-gradient(100deg, #6651df, #8b58e8 58%, #ff9a55);
+  color: #ffffff;
   overflow: hidden;
   padding: 19px 24px;
   transform: rotate(-1.3deg);
@@ -522,11 +522,11 @@ h2 {
   transform: rotate(-4deg);
 }
 .chip-yellow {
-  background: #ffeab6;
+  background: #ffe3b5;
   transform: rotate(3deg);
 }
 .chip-pink {
-  background: #ffdbe6;
+  background: #ddd9ff;
   transform: rotate(-2deg);
 }
 .chip-green {
@@ -560,7 +560,7 @@ h2 {
   margin-bottom: 38px;
 }
 .section-heading .eyebrow {
-  color: #ffb6be;
+  color: #c5bfff;
   margin-bottom: 18px;
 }
 .section-heading h2 {
@@ -792,7 +792,7 @@ h2 {
   border: 0;
   border-radius: 50px;
   background: var(--pink);
-  box-shadow: 0 5px 0 #be2855;
+  box-shadow: 0 5px 0 #4a35b7;
   color: white;
   margin-top: -22px;
   z-index: 2;
@@ -808,11 +808,11 @@ h2 {
 }
 .practice-ping:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 0 #be2855;
+  box-shadow: 0 8px 0 #4a35b7;
 }
 .practice-ping:active {
   transform: translateY(3px);
-  box-shadow: 0 2px 0 #be2855;
+  box-shadow: 0 2px 0 #4a35b7;
 }
 .play-response {
   font-size: 11px;
@@ -905,12 +905,12 @@ h2 {
   color: #417553;
 }
 .icon-pink {
-  background: #ffd9e2;
+  background: #ddd9ff;
   color: var(--pink);
 }
 .icon-purple {
-  background: #e9ddf4;
-  color: #7f4ca6;
+  background: #d9ecf7;
+  color: #3c7091;
 }
 .rules-grid h3 {
   font:
@@ -925,12 +925,12 @@ h2 {
   line-height: 1.9;
 }
 .waitlist-section {
-  background: #f9d8d6;
+  background: linear-gradient(135deg, #e4e2ff, #f4e8dc);
   padding: 85px 0;
   position: relative;
   background-image: radial-gradient(
     ellipse at 5% 90%,
-    #ffe9bdaa,
+    #ffd5a6aa,
     transparent 55%
   );
 }
@@ -941,7 +941,7 @@ h2 {
   align-items: center;
 }
 .waitlist-intro .eyebrow {
-  color: #92524f;
+  color: #5f54a3;
 }
 .waitlist-intro h2 {
   font-size: 56px;
@@ -1040,8 +1040,8 @@ h2 {
 }
 .field input,
 .field textarea {
-  background: #fffdf9;
-  border: 1px solid #e5dcd1;
+  background: #ffffff;
+  border: 1px solid var(--line);
   border-radius: 9px;
   width: 100%;
   padding: 13px 12px;
@@ -1061,7 +1061,7 @@ h2 {
 .field textarea:focus {
   outline: 0;
   border-color: var(--pink);
-  box-shadow: 0 0 0 3px #e5326815;
+  box-shadow: 0 0 0 3px #7257e815;
 }
 .field-hint,
 .field-error {
@@ -1342,8 +1342,8 @@ dialog > img {
   margin-bottom: 42px;
 }
 .signal-section {
-  background: #201928;
-  color: #fff9f1;
+  background: #17172f;
+  color: #f7f8ff;
   padding: 90px 0 80px;
   overflow: clip;
 }
@@ -1351,7 +1351,7 @@ dialog > img {
   text-align: center;
 }
 .signal-heading .eyebrow {
-  color: #ff9cbc;
+  color: #b9b3ff;
   justify-content: center;
 }
 .signal-heading h2 {
@@ -1361,7 +1361,7 @@ dialog > img {
   letter-spacing: -2px;
 }
 .signal-heading .serif-word {
-  color: #ffa0b5;
+  color: #ffc17b;
 }
 .signal-heading > p:last-child {
   color: #c9bace;
@@ -1389,9 +1389,9 @@ dialog > img {
   font-weight: 700;
 }
 .signal-choice button[aria-pressed="true"] {
-  background: #ffc8da;
-  color: #511a31;
-  border-color: #ffc8da;
+  background: #d9d4ff;
+  color: #2b2456;
+  border-color: #d9d4ff;
 }
 .signal-phones {
   display: grid;
@@ -1466,7 +1466,7 @@ dialog > img {
   width: 100%;
   border-radius: 50px;
   color: white;
-  background: linear-gradient(110deg, #f33674, #fa826d);
+  background: linear-gradient(110deg, #6846e6, #ff9a55);
   padding: 14px 8px;
   display: flex;
   gap: 8px;
@@ -1474,7 +1474,7 @@ dialog > img {
   justify-content: center;
   font-size: 12px;
   font-weight: 700;
-  box-shadow: 0 8px 22px #f2367435;
+  box-shadow: 0 8px 22px #7257e835;
   transition: transform 0.2s;
 }
 .signal-action:hover {
@@ -1502,10 +1502,10 @@ dialog > img {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: #ffa9c8;
-  background: #66394e;
+  color: #ffd28d;
+  background: #40376f;
   font-size: 30px;
-  box-shadow: 0 0 45px #f5467440;
+  box-shadow: 0 0 45px #7257e840;
 }
 .bridge-caption {
   font-size: 10px;
@@ -1533,20 +1533,20 @@ dialog > img {
   position: absolute;
   width: 155px;
   height: 155px;
-  border: 1px solid #c074a65c;
+  border: 1px solid #9a8ff05c;
   border-radius: 50%;
   z-index: -1;
   box-shadow:
-    0 0 0 20px #fe6aa408,
-    0 0 0 40px #fe6aa404;
+    0 0 0 20px #7257e808,
+    0 0 0 40px #7257e804;
 }
 .demo-notification {
   display: flex;
   align-items: center;
   text-align: left;
   gap: 10px;
-  background: #fbe7f2;
-  color: #392634;
+  background: #e9edff;
+  color: #292846;
   padding: 15px 11px;
   border-radius: 18px;
   opacity: 0.4;
@@ -1562,7 +1562,7 @@ dialog > img {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  background: #ed3f78;
+  background: #7257e8;
   color: white;
   font-size: 22px;
   flex-shrink: 0;
@@ -1588,11 +1588,11 @@ dialog > img {
   justify-content: center;
   gap: 22px;
   font-size: 10px;
-  color: #ffd0e1;
+  color: #d9d4ff;
   margin-top: 20px;
 }
 .receiver-options span:first-child {
-  background: #663347;
+  background: #40376f;
   padding: 7px 12px;
   border-radius: 20px;
 }
@@ -1611,7 +1611,7 @@ dialog > img {
 .signal-story p {
   font-size: 14px;
   min-height: 24px;
-  color: #ffe2ee;
+  color: #e8e6ff;
 }
 .signal-story button {
   margin-top: 12px;
@@ -1653,13 +1653,13 @@ dialog > img {
   transform: translateY(0) scale(1);
 }
 .signal-demo.received .receiver-phone {
-  border-color: #f296be;
+  border-color: #a89cff;
   box-shadow:
-    0 30px 70px #ef43852b,
+    0 30px 70px #7257e82b,
     inset 0 0 0 5px #15121b;
 }
 .signal-demo[data-mode="like"] .signal-action {
-  background: linear-gradient(110deg, #b464ce, #ee75a2);
+  background: linear-gradient(110deg, #5f46d5, #ff9a55);
 }
 .live-likes {
   display: grid;
@@ -1701,8 +1701,8 @@ dialog > img {
   border-radius: 48% 45% 40% 44%;
   background: radial-gradient(
     ellipse,
-    #ffd1df 0%,
-    #ffe5d3 58%,
+    #d9d7ff 0%,
+    #ffe2c6 58%,
     transparent 70%
   );
   padding: 60px 0 70px;
@@ -1716,7 +1716,7 @@ dialog > img {
   right: 15px;
   font-family: Georgia, serif;
   font-style: italic;
-  color: #9c5068;
+  color: #6554ad;
   transform: rotate(8deg);
   font-size: 19px;
 }
@@ -1725,9 +1725,9 @@ dialog > img {
   gap: 13px;
   align-items: center;
   background: #fffdf9;
-  box-shadow: 0 10px 35px #c6648826;
+  box-shadow: 0 10px 35px #6654aa26;
   padding: 16px 22px;
-  border: 1px solid #ffe1e5;
+  border: 1px solid #dfe0ff;
   border-radius: 19px;
   position: absolute;
 }
@@ -1762,7 +1762,7 @@ dialog > img {
 .pingg-showcase {
   background:
     radial-gradient(circle at 12% 18%, #7b39c866, transparent 30%),
-    radial-gradient(circle at 92% 78%, #f13f9d44, transparent 32%),
+    radial-gradient(circle at 92% 78%, #ff9a5544, transparent 32%),
     var(--night);
   color: var(--cream);
   border-radius: 36px;
@@ -1778,7 +1778,7 @@ dialog > img {
   margin-bottom: 42px;
 }
 .showcase-heading .eyebrow {
-  color: #ffb6be;
+  color: #c5bfff;
   margin-bottom: 18px;
 }
 .showcase-heading h2 {
@@ -1822,7 +1822,7 @@ dialog > img {
   transform: translateY(30px) rotate(1.5deg);
 }
 .showcase-card:hover {
-  border-color: #ff9edb88;
+  border-color: #b8adff88;
   box-shadow: 0 28px 65px #09050b99;
   transform: translateY(-8px) rotate(0deg);
 }
@@ -1846,7 +1846,7 @@ dialog > img {
   padding: 16px 15px 18px;
 }
 .showcase-card figcaption > span {
-  color: #ffb6be;
+  color: #c5bfff;
   font:
     800 11px/1 "Manrope",
     sans-serif;
@@ -1885,8 +1885,8 @@ dialog > img {
 @keyframes sender-pulse {
   50% {
     box-shadow:
-      0 0 0 12px #f3367426,
-      0 0 40px #f3367444;
+      0 0 0 12px #7257e826,
+      0 0 40px #7257e844;
     transform: scale(0.96);
   }
 }
@@ -2696,7 +2696,7 @@ body {
   overflow-x: clip;
 }
 .button-pink {
-  color: #2f1820;
+  color: #ffffff;
 }
 .journey-copy h3 br:after {
   content: " ";

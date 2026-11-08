@@ -1,7 +1,7 @@
 (() => {
   const steps = [
     {
-      title: ["Saw someone?", "Start there."],
+      title: ["Spot a good vibe?", "Start there."],
       description:
         "Turn on Nearby when you’re open to a hello. See other people who have opted in around you. Real people, in the same real-life moment.",
       tip: "Both of you need Nearby. No surprise Pinggs to strangers without the app.",
@@ -21,7 +21,7 @@
       alt: "Concept screen showing a person and the Pingg action",
     },
     {
-      title: ["Someone noticed you.", "Feels pretty good."],
+      title: ["A little lift.", "Feels pretty good."],
       description:
         "Review your appreciation in Tonight. Take a moment, hold it for later or decide it’s not your thing. You get to choose what happens next.",
       tip: "The Android pilot is testing background alerts. Device permissions and battery settings matter.",
@@ -186,7 +186,7 @@
       "#signal-caption",
       like
         ? "Give a little appreciation. See the little lift. Tap to try it."
-        : "You send a little courage. They get butterflies. Tap to try it.",
+        : "You send a little courage. They get a lift. Tap to try it.",
     );
   };
   const selectMode = (next) => {
@@ -200,14 +200,14 @@
         String(button.dataset.signal === mode),
       ),
     );
-    text("#signal-symbol", like ? "♡" : "✦");
+    text("#signal-symbol", like ? "⚡" : "✦");
     text(
       "#send-heading",
-      like ? "You like their energy." : "You noticed Rhea.",
+      like ? "You caught their vibe." : "You spotted a good vibe.",
     );
     text(
       "#receive-heading",
-      like ? "A compliment. Out of nowhere." : "That “wait, me?” feeling.",
+      like ? "A little lift. Out of nowhere." : "That “wait, me?” feeling.",
     );
     text(
       "#receive-notice",
@@ -216,17 +216,17 @@
     text(
       "#receive-detail",
       like
-        ? "You made an impression. No reply needed."
+        ? "You stood out. No reply needed."
         : "Someone wants to say hello. Your move.",
     );
     text(
       "#receiver-feeling",
       like
-        ? "A little confidence boost. Just because."
+        ? "A little boost. Just because."
         : "Someone noticed you. Let that sink in.",
     );
     document.querySelector("#receiver-options").hidden = like;
-    text(".travelling-signal", like ? "♡" : "✦");
+    text(".travelling-signal", like ? "⚡" : "✦");
   };
   const send = () => {
     reset();
