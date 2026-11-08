@@ -52,7 +52,8 @@ const server = http.createServer(async (req, res) => {
   const file = path.resolve(root, relative);
   if (
     !file.startsWith(root + path.sep) ||
-    (!publicFiles.has(relative) && !/^assets\/[a-z0-9.-]+$/.test(relative)) ||
+    (!publicFiles.has(relative) &&
+      !/^assets\/(?:[a-z0-9.-]+\/)*[a-z0-9.-]+$/.test(relative)) ||
     !fs.existsSync(file)
   ) {
     res.writeHead(404).end("Not found");

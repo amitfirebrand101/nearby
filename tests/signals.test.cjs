@@ -122,7 +122,7 @@ test("Ping demonstration distinguishes sending from received, then supports repl
   assert.equal(s.nodes["#signal-demo"].classList.contains("received"), false);
   s.finish();
   assert.ok(s.nodes["#signal-demo"].classList.contains("received"));
-  assert.match(s.nodes["#signal-caption"].textContent, /Ping received/);
+  assert.match(s.nodes["#signal-caption"].textContent, /Pingg received/);
   assert.equal(s.nodes["#send-signal"].disabled, false);
   s.click("#replay-signal");
   assert.ok(s.nodes["#signal-demo"].classList.contains("sending"));

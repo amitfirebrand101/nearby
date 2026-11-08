@@ -4,7 +4,7 @@
       title: ["Saw someone?", "Start there."],
       description:
         "Turn on Nearby when you’re open to a hello. See other people who have opted in around you. Real people, in the same real-life moment.",
-      tip: "Both of you need Nearby. No surprise Pings to strangers without the app.",
+      tip: "Both of you need Nearby. No surprise Pinggs to strangers without the app.",
       sticker: "a hello, on your terms ✳",
       source: "day",
       crop: [40, 449, 202, 395],
@@ -13,12 +13,12 @@
     {
       title: ["A small tap.", "Not a big scene."],
       description:
-        "Send a Ping to break the ice. Or a Live Like to appreciate them, without asking for a conversation. Two little ways to make a real-life moment feel good.",
+        "Send a Pingg to break the ice. Or a Live Like to appreciate them, without asking for a conversation. Two little ways to make a real-life moment feel good.",
       tip: "Appreciation is an invitation. It doesn’t mean they owe you a response.",
       sticker: "good energy, sent ↗",
       source: "day",
       crop: [261, 451, 186, 385],
-      alt: "Concept screen showing a person and the Ping action",
+      alt: "Concept screen showing a person and the Pingg action",
     },
     {
       title: ["Someone noticed you.", "Feels pretty good."],
@@ -33,7 +33,7 @@
     {
       title: ["A yes, on your terms.", "Share just enough."],
       description:
-        "Want to keep talking? Choose the Instagram or WhatsApp details you’d like to share. A Ping alone never gives someone access to your socials.",
+        "Want to keep talking? Choose the Instagram or WhatsApp details you’d like to share. A Pingg alone never gives someone access to your socials.",
       tip: "Only selected contact details are sent. The concept shows extra channels not in the current pilot.",
       sticker: "only what you choose ✓",
       source: "day",
@@ -175,7 +175,7 @@
     demo.classList.remove("sending", "received");
     sendButton.disabled = false;
     const like = mode === "like";
-    text("#signal-button-text", like ? "Send a Live Like" : "Send a Ping");
+    text("#signal-button-text", like ? "Send a Live Like" : "Send a Pingg");
     text(
       "#sender-status",
       like
@@ -211,7 +211,7 @@
     );
     text(
       "#receive-notice",
-      like ? "Alex sent you a Live Like." : "You got a Ping from Alex.",
+      like ? "Alex sent you a Live Like." : "You got a Pingg from Alex.",
     );
     text(
       "#receive-detail",
@@ -236,7 +236,7 @@
     demo.classList.add("sending");
     text(
       "#signal-button-text",
-      mode === "like" ? "Sending Like…" : "Sending Ping…",
+      mode === "like" ? "Sending Like…" : "Sending Pingg…",
     );
     text("#signal-caption", "A little good energy, on its way…");
     const finish = () => {
@@ -245,7 +245,7 @@
       sendButton.disabled = false;
       text(
         "#signal-button-text",
-        mode === "like" ? "Like sent ✓ · again?" : "Ping sent ✓ · again?",
+        mode === "like" ? "Like sent ✓ · again?" : "Pingg sent ✓ · again?",
       );
       text(
         "#sender-status",
@@ -257,7 +257,7 @@
         "#signal-caption",
         mode === "like"
           ? "Like sent. Smile received. No conversation required. (Demo)"
-          : "Ping received. That little rush, on both sides. Their choice comes next. (Demo)",
+          : "Pingg received. That little rush, on both sides. Their choice comes next. (Demo)",
       );
     };
     if (reduced()) finish();
